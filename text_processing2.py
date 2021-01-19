@@ -40,7 +40,7 @@ def digits_to_words(input_string):
     for ch in temp_string:
         digit_string += words[int(ch)] + ' '
 
-    digit_string.strip()
+    digit_string = digit_string.strip()
 
     return digit_string
 
