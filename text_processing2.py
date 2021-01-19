@@ -29,18 +29,18 @@ def digits_to_words(input_string):
             'three one four one five'
     """
 
-    temp_string = ""
-    digit_string = ""
+    digits = []
+    digit_lst = []
     words = ('zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine')
 
     for ch in input_string:
         if ch.isdigit():
-            temp_string += ch
+            digits.append(ch)
 
-    for ch in temp_string:
-        digit_string += words[int(ch)] + ' '
+    for ch in digits:
+        digit_lst.append(words[int(ch)])
 
-    digit_string = digit_string.strip()
+    digit_string = ' '.join(digit_lst)
 
     return digit_string
 
@@ -77,28 +77,15 @@ def to_camel_case(underscore_str):
             >> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
     """
+
     if '_' not in underscore_str:
         return underscore_str
 
-    temp_str = underscore_str.lower()
-    camelcase_str = temp_str[0]
+    splited_lst = underscore_str.replace('_',' ').split()
+    for i in range(1, len(splited_lst)):
+        splited_lst[i] = splited_lst[i].capitalize()
 
-
-    for i in range(1, len(temp_str)):
-        left = temp_str[i-1]
-        ch = temp_str[i]
-
-        if ch.isalpha():
-            if left == '_':
-                camelcase_str += ch.upper()
-            else:
-                camelcase_str += ch
-
-    camelcase_str = camelcase_str.replace('_', '')
-
-    if camelcase_str:
-        camelcase_str = camelcase_str[0].lower() + camelcase_str[1:]
-
+    camelcase_str = ''.join(splited_lst)
 
     return camelcase_str
 
