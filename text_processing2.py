@@ -81,7 +81,7 @@ def to_camel_case(underscore_str):
     if '_' not in underscore_str:
         return underscore_str
 
-    splited_lst = underscore_str.replace('_',' ').split()
+    splited_lst = underscore_str.lower().replace('_',' ').split()
     for i in range(1, len(splited_lst)):
         splited_lst[i] = splited_lst[i].capitalize()
 
