@@ -20,15 +20,28 @@ def digits_to_words(input_string):
             ex - 'one nine one zero four'
 
         Examples:
-            >>> import text_processing2 as tp2
-            >>> digits_str1 = "Zip Code: 19104"
-            >>> tp2.digits_to_words(digits_str1)
+            >> import text_processing2 as tp2
+            >> digits_str1 = "Zip Code: 19104"
+            >> tp2.digits_to_words(digits_str1)
             'one nine one zero four'
-            >>> digits_str2 = "Pi is 3.1415..."
-            >>> tp2.digits_to_words(digits_str2)
+            >> digits_str2 = "Pi is 3.1415..."
+            >> tp2.digits_to_words(digits_str2)
             'three one four one five'
     """
-    digit_string = None
+
+    temp_string = ""
+    digit_string = ""
+    words = ('zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine')
+
+    for ch in input_string:
+        if ch.isdigit():
+            temp_string += ch
+
+    for ch in temp_string:
+        digit_string += words[int(ch)] + ' '
+
+    digit_string.strip()
+
     return digit_string
 
 
@@ -53,16 +66,37 @@ def to_camel_case(underscore_str):
             camelcase_str (string): camelcase를 따른 스트링
 
         Examples:
-            >>> import text_processing2 as tp2
-            >>> underscore_str1 = "to_camel_case"
-            >>> tp2.to_camel_case(underscore_str1)
+            >> import text_processing2 as tp2
+            >> underscore_str1 = "to_camel_case"
+            >> tp2.to_camel_case(underscore_str1)
             "toCamelCase"
-            >>> underscore_str2 = "__EXAMPLE__NAME__"
-            >>> tp2.to_camel_case(underscore_str2)
+            >> underscore_str2 = "__EXAMPLE__NAME__"
+            >> tp2.to_camel_case(underscore_str2)
             "exampleName"
-            >>> underscore_str3 = "alreadyCamel"
-            >>> tp2.to_camel_case(underscore_str3)
+            >> underscore_str3 = "alreadyCamel"
+            >> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
     """
-    camelcase_str = None
+    if '_' not in underscore_str:
+        return underscore_str
+
+    temp_str = underscore_str.lower()
+    camelcase_str = temp_str[0]
+
+
+    for i in range(1, len(temp_str)):
+        left = temp_str[i-1]
+        ch = temp_str[i]
+
+        if ch.isalpha():
+            if left == '_':
+                camelcase_str += ch.upper()
+            else:
+                camelcase_str += ch
+
+    camelcase_str = camelcase_str.replace('_', '')
+    camelcase_str = camelcase_str[0].lower() + camelcase_str[1:]
+
+
     return camelcase_str
+
